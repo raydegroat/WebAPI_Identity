@@ -132,7 +132,7 @@ namespace WebAPI_Identity.Controllers
                 return BadRequest("password doesn't match");
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes.(Configuration.GetSection("Secret").Value);
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Secret").Value);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {

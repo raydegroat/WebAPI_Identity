@@ -58,7 +58,7 @@ namespace WebAPI_Identity
                     }
                 };
                 options.RequireHttpsMetadata = false;
-                options.SaveToken = true,
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,

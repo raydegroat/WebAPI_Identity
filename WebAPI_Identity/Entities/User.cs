@@ -34,7 +34,7 @@ namespace WebAPI_Identity.Entities
 
         public bool VerifyPasswordHash(string password)
         {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(PasswordSalt))
             {
                 
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));

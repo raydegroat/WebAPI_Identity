@@ -117,10 +117,11 @@ namespace WebAPI_Identity.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] LoginModel model)
+        public async Task<ActionResult> Login([FromBody]LoginModel model)
         {
             if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
                 return BadRequest("email or password empty");
+
             var user = await _context.Users.SingleOrDefaultAsync(user => user.Email == model.Email);
 
             // check if username exists
@@ -129,7 +130,7 @@ namespace WebAPI_Identity.Controllers
 
             // check if password is correct
             if (!user.VerifyPasswordHash(model.Password))
-                return BadRequest("password doesn't match");
+                return BadRequest("passwords don't match");
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Secret").Value);
@@ -148,7 +149,7 @@ namespace WebAPI_Identity.Controllers
 
             return Ok(
                 new {
-                    Íd = user.Id,
+                    Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,

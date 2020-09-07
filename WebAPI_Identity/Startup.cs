@@ -38,6 +38,7 @@ namespace WebAPI_Identity
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -80,7 +81,8 @@ namespace WebAPI_Identity
 
             app.UseRouting();
 
-            app.UseCors(X => X.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthorization();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
